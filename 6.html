@@ -24,18 +24,20 @@ let tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 });
 tileLayer.addTo(map);
 
-let feature = {
-	"type" : "Feature",
-	"properties" : {
-		"name" : "京都御苑",
-		"url" : "https://www.openstreetmap.org/#map=17/"+lat+"/"+lng
-	},
-	"geometry" :  {
-		"type": "Point",
-		"coordinates" : [lng, lat]	//注意：緯度経度の渡し方が逆になる
+let features = [
+	{
+		"type" : "Feature",
+		"properties" : {
+			"name" : "京都御苑",
+			"url" : "https://www.openstreetmap.org/#map=17/"+lat+"/"+lng
+		},
+		"geometry" :  {
+			"type": "Point",
+			"coordinates" : [lng, lat]	//注意：緯度経度の渡し方が逆になる
+		}
 	}
-};
+];
 
-L.geoJSON(feature).addTo(map);
+L.geoJSON(features).addTo(map);
 </script>
 </html>
