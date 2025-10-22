@@ -24,29 +24,31 @@ let tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 });
 tileLayer.addTo(map);
 
-let feature = {
-	"type" : "Feature",
-	"properties" : {
-		"name" : "京都御苑",
-		"url" : "https://www.openstreetmap.org/#map=17/"+lat+"/"+lng
-	},
-	"geometry" :  {
-		"type": "Point",
-		"coordinates" : [lng, lat]	//注意：緯度経度の渡し方が逆になる
+let feature = [
+	{
+		"type" : "Feature",
+		"properties" : {
+			"name" : "京都御苑",
+			"url" : "https://www.openstreetmap.org/#map=17/"+lat+"/"+lng
+		},
+		"geometry" :  {
+			"type": "Point",
+			"coordinates" : [lng, lat]	//注意：緯度経度の渡し方が逆になる
+		}
 	}
-};
+];
 
-L.geoJSON(feature, {
-    onEachFeature: function(features, layer) {
+L.geoJSON(features, {
+    onEachFeature: function(feature, layer) {
     	// 位置情報のオブジェクトにURLの値があった場合
-		if (features.properties && features.properties.url) {
+		if (feature.properties && feature.properties.url) {
 			//PCでマーカーをクリック
 			layer.on('click', function(ele) {
-				location.href = features.properties.url;
+				location.href = feature.properties.url;
 			});
 			//スマホでマーカーをタップ
 			layer.on('tap', function(ele) {
-				location.href= features.properties.url;
+				location.href= feature.properties.url;
 			});
 		}
 	}
